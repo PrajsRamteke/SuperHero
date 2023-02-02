@@ -1,12 +1,12 @@
 import './App.css';
-// import StylePage from './components/StylePage';
 import SuperheroSearch from './components/SuperheroSearch';
+// import Sample from "./components/Sample"
 
 function App() {
   return (
-    <div className="App">
+    <div className='App'>
         <SuperheroSearch/>
-        {/* <StylePage/> */}
+        {/* <Sample/> */}
     </div>
   );
 }

@@ -128,7 +128,19 @@ letter-spacing: 1px;
   font-weight: 600;
   word-spacing: 2px;
 }
-.Powerstats{
+.Powerstats, .Appearance, .Connection, .Biography{
   /* border: 1px solid white; */
   margin: 10px 40px 10px 0px;
+}
+::-webkit-scrollbar{
+width: 6px;
+}
+::-webkit-scrollbar-track{
+  background: rgb(252, 44, 44);
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background-color: rgb(238, 238, 97);
+  /* border: 2px solid transparent;
+  background-clip: content-box; */
 }

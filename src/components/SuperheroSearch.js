@@ -45,7 +45,7 @@ function SuperheroSearch({}) {
 
   function handleSelection(hero) {
     SetSelectedHero(hero);
-    // console.log(hero);
+    console.log(hero);
     setShowList(false);
   }
 

@@ -6,13 +6,13 @@ function SuperheroSearch() {
   const [error, setError] = useState();
   const [supname, setSupname] = useState("");
   const [selectedHero, SetSelectedHero] = useState('');
-  const [showList, setShowList] = useState(true);
+  const [showList, setShowList] = useState(false);
 
   useEffect(() => {
-   if(!selectedHero){
-      setSupname("Red Hulk");
+    if (!selectedHero) {
+      setSupname("hulk");
       setShowList(false);
-   }
+    }
   }, []);
 
   useEffect(() => {
@@ -25,23 +25,21 @@ function SuperheroSearch() {
       )
       .then((response) => {
         setData(response.data);
-        // console.log(response.data);
-        if(!selectedHero){
+        console.log(response.data);
+        if (!selectedHero) {
           SetSelectedHero(response.data.results[0]);
-          // console.log(response.data.results[0]);
-        } 
+        }
         setShowList(true);
       })
       .catch((error) => {
         setError("Data Not Found");
-      });   
+      });
   };
 
-  function handleSelection(hero){ 
+  function handleSelection(hero){
     SetSelectedHero(hero);
     setShowList(false);
   }
-  
 
   return (
     <div>
@@ -49,11 +47,11 @@ function SuperheroSearch() {
         <input type="text" value={supname} onChange={(e) => setSupname(e.target.value)} />
       </div>
 
-      { showList && data.response ==="success"  &&(
+      { showList && data.response === "success" && (
         <ul>
           {data.results.map((hero, index) => (
-            <li key={index} onClick={()=>handleSelection(hero)}>{hero.name}</li>
-            ))}
+            <li key={index} onClick={() => handleSelection(hero)}>{hero.name}</li>
+          ))}
         </ul>
       )}
 

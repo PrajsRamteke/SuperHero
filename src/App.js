@@ -1,12 +1,12 @@
 import './App.css';
-import New from './components/New';
+// import StylePage from './components/StylePage';
 import SuperheroSearch from './components/SuperheroSearch';
 
 function App() {
   return (
     <div className="App">
         <SuperheroSearch/>
-        {/* <New/> */}
+        {/* <StylePage/> */}
     </div>
   );
 }

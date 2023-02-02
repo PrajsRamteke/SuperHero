@@ -39,42 +39,77 @@ function SuperheroSearch() {
 
   function handleSelection(hero){ 
     SetSelectedHero(hero);
+    // console.log(hero);
     setShowList(false);
   }
   
-
   return (
-    <div>
-      <div>
-        <input type="text" value={supname} onChange={(e) => setSupname(e.target.value)} />
+    <div className="back">
+    <div className="fullPage">
+      <div className="nav">
+          <h3 className="Super">Super<span style={{color:"red"}}>Hero</span></h3>
+          <div className="inputType">
+           <input type="text" value={supname} onChange={(e) => setSupname(e.target.value)} />  
+          </div>
       </div>
 
       { showList && data.response ==="success"  &&(
-        <ul>
+        <ul className="listData">
           {data.results.map((hero, index) => (
-            <li key={index} onClick={()=>handleSelection(hero)}>{hero.name}</li>
+            <li className="list" key={index} onClick={()=>handleSelection(hero)}>
+              <img src={hero.image.url} alt={hero.name} />
+              <span>{hero.name}</span>
+              </li>
             ))}
         </ul>
       )}
 
       { selectedHero && (
-        <div>
-          <h2>{selectedHero.name}</h2>
-          <p>{selectedHero.biography['full-name']}</p>
-          <p>{selectedHero.biography.publisher}</p>
-          <img src={selectedHero.image.url} alt={selectedHero.name} />
-
-          <div>
-            <h1>Powerstates:</h1>
-            <h3>{selectedHero.powerstats.combat}</h3>
-            <h3>{selectedHero.powerstats.durability}</h3>
-            <h3>{selectedHero.powerstats.intelligence}</h3>
-            <h3>{selectedHero.powerstats.power}</h3>
-            <h3>{selectedHero.powerstats.speed}</h3>
-            <h3>{selectedHero.powerstats.strength}</h3>
+        <div className='bodyData'>
+          <div className="img-container">
+            <img src={selectedHero.image.url} alt={selectedHero.name} />
           </div>
+ 
+          <div className='RightData'>
+          <h2>{selectedHero.name}</h2>
+            <div className='dataHeadings'>
+              <h3>POWERSTATS</h3>
+              <h3>BIOGRAPHY</h3>
+              <h3>APPEARANCE</h3>
+              <h3>CONNECTION</h3>
+            </div>
+
+              <div className="Powerstats">
+                <div className='miniData'>
+                  <span>INTELLIGENCE</span>
+                  <span>{selectedHero.powerstats.intelligence}</span>
+                </div>
+                <div className='miniData'>
+                  <span>STRENGTH</span>
+                  <span>{selectedHero.powerstats.strength}</span>
+                </div>
+                <div className='miniData'>
+                  <span>SPEED</span>
+                  <span>{selectedHero.powerstats.speed}</span>
+                </div>
+                <div className='miniData'>
+                  <span>DURABILITY</span>
+                  <span>{selectedHero.powerstats.durability}</span>
+                </div>
+                <div className='miniData'>
+                  <span>POWER</span>
+                  <span>{selectedHero.powerstats.power}</span>
+                </div>
+                <div className='miniData'>
+                  <span>COMBAT</span>
+                  <span>{selectedHero.powerstats.combat}</span>
+                </div>
+              </div>
+          </div>
+
         </div>
       )}
+    </div>
     </div>
   );
 }

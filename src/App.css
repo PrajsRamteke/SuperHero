@@ -73,6 +73,28 @@
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
+}
+.dataHeadings .NamLink::after{
+  position: absolute;
+  content: "";
+  background-color: red;
+  width: 0;
+  height: 3px;
+  bottom: 14%;
+  right: 0;
+  transform: translate(-4% , -10%);
+  border-radius: 10px;
+  transition:  0.3s linear;
+}
+.dataHeadings .NamLink:focus::after{
+  width: 90%;
+}
+/* .dataHeadings .NamLink:hover::after{
+  width: 90%;
+} */
+.dataHeadings .NamLink:hover{
+  color: rgb(255, 252, 195);
 }
 .miniData{
   display: flex;

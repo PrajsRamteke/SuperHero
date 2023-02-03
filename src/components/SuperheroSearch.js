@@ -6,7 +6,7 @@ import Appearance from "./Appearance";
 import Biography from "./Biography";
 import Connection from "./Connection";
 
-function SuperheroSearch({}) {
+function SuperheroSearch() {
   const [data, setData] = useState({});
   const [error, setError] = useState();
   const [supname, setSupname] = useState("");
@@ -16,7 +16,7 @@ function SuperheroSearch({}) {
   useEffect(() => {
     if (!selectedHero) {
       setSupname("Red Hulk");
-      setShowList(false);
+      // setShowList(false); //error it showing true
     }
   }, []);
 
@@ -36,7 +36,12 @@ function SuperheroSearch({}) {
           SetSelectedHero(response.data.results[0]);
           // console.log(response.data.results[0]);
         }
-        setShowList(true);
+        if(supname ==="Red Hulk"){
+          setShowList(false);
+        }
+        else{
+          setShowList(true);
+        }
       })
       .catch((error) => {
         setError("Data Not Found");
@@ -45,7 +50,7 @@ function SuperheroSearch({}) {
 
   function handleSelection(hero) {
     SetSelectedHero(hero);
-    console.log(hero);
+    // console.log(hero);
     setShowList(false);
   }
 
@@ -82,7 +87,7 @@ function SuperheroSearch({}) {
               <h2>{selectedHero.name}</h2>
 
               <div className="dataHeadings">
-                  <Link className="NamLink" to={`/`}>POWERSTATS</Link>
+                  <Link className="NamLink active" to={`/`}>POWERSTATS</Link>
                   <Link className="NamLink" to={`/biography`}>BIOGRAPHY</Link>
                   <Link className="NamLink" to={`/appearance`}>APPEARANCE</Link>
                   <Link className="NamLink" to={`/connection`}>CONNECTION</Link>

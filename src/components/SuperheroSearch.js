@@ -8,7 +8,6 @@ import Connection from "./Connection";
 
 function SuperheroSearch() {
   const [data, setData] = useState({});
-  const [error, setError] = useState();
   const [supname, setSupname] = useState("");
   const [selectedHero, SetSelectedHero] = useState("");
   const [showList, setShowList] = useState(true);
@@ -18,7 +17,7 @@ function SuperheroSearch() {
       setSupname("Red Hulk");
       // setShowList(false); //error it showing true
     }
-  }, []);
+  });
 
   useEffect(() => {
     fetchData();
@@ -33,18 +32,17 @@ function SuperheroSearch() {
         setData(response.data);
         // console.log(response.data);
         if (!selectedHero) {
-          SetSelectedHero(response.data.results[0]);
+          SetSelectedHero(response.data.results[0]); //only run first time
           // console.log(response.data.results[0]);
         }
-        if(supname ==="Red Hulk"){
-          setShowList(false);
-        }
-        else{
+        if (supname === "Red Hulk") {
+          setShowList(false); //only run first time
+        } else {
           setShowList(true);
         }
       })
       .catch((error) => {
-        setError("Data Not Found");
+        // console.log("Data Not Found(catch error)");
       });
   };
 
@@ -58,18 +56,26 @@ function SuperheroSearch() {
     <div className="back">
       <div className="fullPage">
         <div className="nav">
-          <h3 className="Super">
-            Super<span style={{ color: "red" }}>Hero.</span>
+          <h3 className="SuperText">
+            Super<span>Hero.</span>
           </h3>
           <div className="inputType">
-            <input type="text" value={supname} onChange={(e) => setSupname(e.target.value)} />
+            <input
+              type="text"
+              value={supname}
+              onChange={(e) => setSupname(e.target.value)}
+            />
           </div>
         </div>
-  
+
         {showList && data.response === "success" && (
           <ul className="listData">
             {data.results.map((hero, index) => (
-              <li className="list" key={index} onClick={() => handleSelection(hero)} >
+              <li
+                className="list"
+                key={index}
+                onClick={() => handleSelection(hero)}
+              >
                 <img src={hero.image.url} alt={hero.name} />
                 <span>{hero.name}</span>
               </li>
@@ -87,21 +93,42 @@ function SuperheroSearch() {
               <h2>{selectedHero.name}</h2>
 
               <div className="dataHeadings">
-                  <Link className="NamLink active" to={`/`}>POWERSTATS</Link>
-                  <Link className="NamLink" to={`/biography`}>BIOGRAPHY</Link>
-                  <Link className="NamLink" to={`/appearance`}>APPEARANCE</Link>
-                  <Link className="NamLink" to={`/connection`}>CONNECTION</Link>
+                <Link className="NamLink active" to={`/`}>
+                  POWERSTATS
+                </Link>
+                <Link className="NamLink" to={`/biography`}>
+                  BIOGRAPHY
+                </Link>
+                <Link className="NamLink" to={`/appearance`}>
+                  APPEARANCE
+                </Link>
+                <Link className="NamLink" to={`/connection`}>
+                  CONNECTION
+                </Link>
               </div>
 
-        
-                <Routes>
-                  <Route exact path="/" element={<Powerstats value={selectedHero} />} />
-                  <Route exact path="/biography" element={<Biography value={selectedHero} />} />
-                  <Route exact path="/appearance" element={<Appearance value={selectedHero} />} />
-                  <Route exact path="/connection"  element={<Connection value={selectedHero} />} />
-                </Routes>
-              
-
+              <Routes>
+                <Route
+                  exact
+                  path="/"
+                  element={<Powerstats value={selectedHero} />}
+                />
+                <Route
+                  exact
+                  path="/biography"
+                  element={<Biography value={selectedHero} />}
+                />
+                <Route
+                  exact
+                  path="/appearance"
+                  element={<Appearance value={selectedHero} />}
+                />
+                <Route
+                  exact
+                  path="/connection"
+                  element={<Connection value={selectedHero} />}
+                />
+              </Routes>
             </div>
           </div>
         )}

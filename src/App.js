@@ -1,12 +1,10 @@
-import './App.css';
-import SuperheroSearch from './components/SuperheroSearch';
-// import Sample from "./components/Sample"
+import "./App.css";
+import SuperheroSearch from "./components/SuperheroSearch";
 
 function App() {
   return (
-    <div className='App'>
-        <SuperheroSearch/>
-        {/* <Sample/> */}
+    <div className="App">
+      <SuperheroSearch />
     </div>
   );
 }

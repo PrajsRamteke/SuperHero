@@ -6,6 +6,8 @@ import Appearance from "./Appearance";
 import Biography from "./Biography";
 import Connection from "./Connection";
 
+const apiKey = process.env.REACT_APP_API_KEY;
+
 function SuperheroSearch() {
   const [data, setData] = useState({});
   const [supname, setSupname] = useState("");
@@ -25,9 +27,7 @@ function SuperheroSearch() {
 
   const fetchData = () => {
     axios
-      .get(
-        `https://www.superheroapi.com/api.php/1818758668525480/search/${supname}`
-      )
+      .get(`https://www.superheroapi.com/api.php/${apiKey}/search/${supname}`)
       .then((response) => {
         setData(response.data);
         // console.log(response.data);
@@ -50,6 +50,10 @@ function SuperheroSearch() {
     SetSelectedHero(hero);
     // console.log(hero);
     setShowList(false);
+  }
+
+  if (!apiKey) {
+    return <a href="">Required: Get your unsplash API key...</a>;
   }
 
   return (
